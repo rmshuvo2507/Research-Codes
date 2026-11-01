@@ -19,12 +19,4 @@ The expected inputs are `DBA.shp` and its companion files, `AHP/AHP.csv`, and th
 | Relative relief | `RELATIVE_RELIEF.tif` |
 | Cloudy days | `CLOUDY_DAYS.tif` |
 
-`AHP.csv` contains factor names and numeric weights in two columns without a header. Factor names must match `LAYER_FILES` in the notebook. The supplied weights are normalized to sum to one; the notebook does not derive a pairwise comparison matrix or calculate an AHP consistency ratio.
-
-The original directions of suitability, LULC score mapping, quantile classification, weighted overlay, equal interval final classification, and five sensitivity scenarios are retained. The sensitivity scenarios set DNI, LULC, Rabi rainfall, temperature, and cloudy days individually to class 1 while retaining the other factors and weights.
-
-Two methodological choices from the supplied notebook are retained: all inputs, including LULC, use bilinear resampling before reclassification, and suitability class breaks are recalculated separately for each degradation scenario. Scenario class percentages therefore use their own score ranges. The analysis grid uses EPSG:32645 with a nominal resolution of 30 m, and area summaries use the original nominal pixel area calculation.
-
-Outputs are written to `V2/OUTPUT`. `Solar_Irrigation_Suitability.tif` and `Solar_Irrigation_Suitability_Classified.tif` are georeferenced rasters. The other map and chart exports are display images, including the TIFF figures.
-
-Comments, section banners, decorative symbols, and repetitive console messages have been removed. Numerical and spatial processing were compared against the supplied notebook using synthetic inputs. The original study analysis has not been rerun here, and saved notebook outputs are cleared.
+The analysis grid uses EPSG:32645 with a nominal resolution of 30 m, and area summaries use the original nominal pixel area calculation.
