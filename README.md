@@ -1,5 +1,12 @@
 # Research Codes
 
+Research notebooks for groundwater and solar irrigation studies.
+
+| Study | Files |
+| --- | --- |
+| Coastal groundwater | [Groundwater notebook](<DELINEATION OF FRESH GROUNDWATER ZONE IN THE COASTAL AQUIFERS OF BANGLADESH.ipynb>) |
+| Solar irrigation in the Barind Tract | [Study folder](Solar_Irrigation_Barind) |
+
 ## DELINEATION OF FRESH GROUNDWATER ZONE IN THE COASTAL AQUIFERS OF BANGLADESH
 
 The notebook classifies groundwater as fresh when measured electrical conductivity is below 1,000 µS/cm. It compares SVM, RF, GBM, XGBoost, and KNN and produces non-saline groundwater potential maps for six districts located in the north of the Sundarbans. The main purpose of the research was to examine the extent of salinity intrusion pathway already occured in the coastal areas of Bangladesh. 
