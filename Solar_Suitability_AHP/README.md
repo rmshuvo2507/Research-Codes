@@ -1,22 +1,13 @@
 # Geospatial Assessment for Solar Irrigation Systems in the Barind Tract of Bangladesh
 
-This notebook uses AHP weighted overlay to assess solar irrigation suitability in the Barind Tract. It normalizes the weights supplied in an external CSV, reclassifies ten raster factors, calculates a weighted suitability score, divides that score into five classes, and runs individual factor degradation scenarios.
+This research assesses the spatial suitability of solar powered irrigation systems in the Barind Tract of northwestern Bangladesh. It combines geospatial analysis with the Analytic Hierarchy Process (AHP) to identify areas that are comparatively favourable for solar irrigation based on solar resource availability, climatic conditions, land use, accessibility, and terrain. The assessment provides a spatial basis for prioritising locations for further investigation and irrigation planning.
 
-Install the packages with `python -m pip install -r requirements.txt`. Open [Geospatial Assessment for Solar Irrigation Systems in the Barind Tract of Bangladesh.ipynb](<Geospatial Assessment for Solar Irrigation Systems in the Barind Tract of Bangladesh.ipynb>) in Jupyter, update `BASE_DIR` in the second cell, and run the cells in order. The original study datasets are required and are not included.
+Ten factors are considered: DNI (Direct Normal Irradiance), LULC (Land Use and Land Cover), R_Rabi (Rabi Season Rainfall), R_Kharif1 (Kharif 1 Season Rainfall), R_Kharif2 (Kharif 2 Season Rainfall), Temperature, DR (Distance from Roads), DW (Distance from Rivers), Relative_Relief, and Cloudy_Days. The raster layers are reprojected and resampled to a common grid within the study boundary using WGS 84 / UTM Zone 45N (EPSG:32645), with a nominal spatial resolution of 30 m. Pixels outside the boundary or missing data in any factor are excluded from the final assessment.
 
-The expected inputs are `DBA.shp` and its companion files, `AHP/AHP.csv`, and these files in `V2/FINAL LAYERS`:
+Continuous factors are reclassified on a suitability scale from 1 to 5 using quantile thresholds. The scoring scheme assigns higher suitability to lower seasonal rainfall, shorter distances from roads, and fewer cloudy days. Higher DNI, temperature, distance from rivers, and relative relief receive higher scores. LULC is assigned separate scores: agricultural land receives 5, bareland 4, miscellaneous land 3, built areas 2, and waterbodies 1.
 
-| Factor | Raster |
-| --- | --- |
-| Direct normal irradiance | `DNI.tif` |
-| Land use and land cover | `LULC.tif` |
-| Rabi rainfall | `Rabi_PR.tif` |
-| Kharif 1 rainfall | `K1_PR.tif` |
-| Kharif 2 rainfall | `K2_PR.tif` |
-| Temperature | `TEMPERATURE.tif` |
-| Distance from roads | `DIS_F_ROAD.tif` |
-| Distance from rivers | `DIS_F_RIVERS.tif` |
-| Relative relief | `RELATIVE_RELIEF.tif` |
-| Cloudy days | `CLOUDY_DAYS.tif` |
+AHP factor weights are read from an external CSV and normalised to sum to one. A weighted linear combination of the reclassified factors produces a continuous suitability score for each valid pixel. The observed score range is divided into five equal intervals representing Most Unsuitable, Moderately Unsuitable, Neutral, Moderately Suitable, and Most Suitable conditions. Class distributions are summarised by pixel count, area in hectares, and percentage of the valid analysis area. The resulting maps express relative suitability under the selected criteria and weights.
 
-The analysis grid uses EPSG:32645 with a nominal resolution of 30 m, and area summaries use the original nominal pixel area calculation.
+Sensitivity is examined through five individual factor degradation scenarios covering DNI, LULC, Rabi rainfall, temperature, and cloudy days. In each scenario, all valid pixels of the selected factor are assigned the lowest suitability score of 1 while the other factors and their weights remain unchanged. Changes in the mean suitability score, percentage score reduction, and suitability class distribution are calculated against the baseline assessment. Class intervals are recalculated for each scenario, so the scenario percentages reflect its own score range.
+
+Install the packages with `python -m pip install -r requirements.txt`. Open the notebook in Jupyter, set `BASE_DIR` to the GIS project directory, and run the cells in order. The required inputs are the study boundary (`DBA.shp` and its companion files), the factor names and weights in `AHP/AHP.csv`, and the ten input rasters in `V2/FINAL LAYERS`. The CSV contains two columns without a header, and its factor names must match `LAYER_FILES` in the notebook. The study datasets are not included in this repository. Suitability rasters, maps, factor weight charts, and sensitivity figures are written to `V2/OUTPUT`.
