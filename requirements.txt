@@ -1,0 +1,15 @@
+numpy
+pandas
+scipy
+matplotlib
+rasterio
+geopandas
+shapely
+pyproj
+fiona
+scikit-learn
+imbalanced-learn
+statsmodels
+xgboost
+joblib
+jupyterlab
